@@ -1,4 +1,4 @@
-# podcast-transcipts
+# podcast-transcripts
 This project transcribes podcast audio and indexes it for search.
 
 It is designed to run on cloud resources, and therefore requires some cluster setup.
