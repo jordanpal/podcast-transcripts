@@ -5,14 +5,14 @@ from datetime import datetime
 
 args = {
     'owner': 'airflow',
-    'start_date': datetime(2020, 10, 18)
+    'start_date': datetime(2020, 10, 18),
     'email': ['jordan.palamos@gmail.com'],
     'email_on_failure': True,
     'email_on_retry': True,
     'retries': 4,
 }
 
-dag = DAG('spark_job', default_args=args, schedule_interval="0 */4 * * *")
+dag = DAG('podcast_dag', default_args=args, schedule_interval="0 */4 * * *")
 
 
 download = SparkSubmitOperator(
