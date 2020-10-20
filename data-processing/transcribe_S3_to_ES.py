@@ -2,12 +2,16 @@ from pyspark import SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import udf, col, sum
 from pyspark.sql.types import StringType
+import boto3
+import io
+from pydub import AudioSegment
+from pydub.silence import split_on_silence
+import speech_recognition as sr
+from elasticsearch import Elasticsearch
 sc = SparkContext()
 spark=SparkSession(sc)
 
 def download_from_s3(key, bucket="podcast-mp3-bucket"):
-    import boto3
-    import io
     s3 = boto3.resource('s3')
     mp3data = io.BytesIO()
     s3.Bucket(bucket).download_fileobj(key, mp3data)
@@ -15,8 +19,6 @@ def download_from_s3(key, bucket="podcast-mp3-bucket"):
 
 def convertToWav(audiomp3):
     """Converts mp3 to wav in memory. Must have pydub, ffmpeg installed."""
-    import io
-    from pydub import AudioSegment
     mp3Audio = io.BytesIO(audiomp3)
     wavAudio = io.BytesIO()
     audio = AudioSegment.from_mp3(mp3Audio)
@@ -32,10 +34,6 @@ def split_and_recognize(binary):
     Requires speech_recognition and pocketsphix python packages.
     Requires swig to be installed. Also possibly libpulse-dev libasound2-dev.
     """
-    import speech_recognition as sr
-    from pydub import AudioSegment
-    from pydub.silence import split_on_silence
-    import io
     r = sr.Recognizer()
     bigWav = AudioSegment(binary)
     chunks = split_on_silence(bigWav, min_silence_len = 500, silence_thresh = bigWav.dBFS-14, keep_silence=500)
@@ -66,7 +64,6 @@ def download_convert_recognize(key):
     return text
 
 def update_elasticsearch(id, index, text):
-    from elasticsearch import Elasticsearch
     es = Elasticsearch(['10.0.0.6:9200', '10.0.0.14:9200', '10.0.0.10:9200'])
     body = { 'doc': { 'transcription': text } }
     try:
