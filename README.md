@@ -20,7 +20,7 @@ This project aims to index podcast transcripts for search, along with other meta
 * Kibana is used to visualize the data
 
 ### Tech Stack
-![tech-stack](https://github.com/jordanpal/podcast-transcripts/blob/main/images/techstack.pdf)
+![tech-stack](https://github.com/jordanpal/podcast-transcripts/blob/main/images/techstack.png)
 
 ## Setup
 In order to run the scripts the following tools must be setup and connected to each other. In my case, everything was set up on AWS EC2 resources:
