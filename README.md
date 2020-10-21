@@ -1,11 +1,11 @@
 # PodText
+Searchable podcast transcripts.
+[Link](https://docs.google.com/presentation/d/184ZNp0H7c3CU6LVKQQr50YVztggaJfLRC9j8nk8rgT4/edit?usp=sharing) to presentation.
 
 ## Table of Contents
 1. [Summary](README.md#summary)
-2. [Links](README.md#links)
-3. [Setup](README.md#setup)
-4. [Data](README.md#data)
-
+2. [Setup](README.md#setup)
+3. [Links](README.md#links)
 
 ## Summary
 ### Introduction
